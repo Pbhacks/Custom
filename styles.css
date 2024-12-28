@@ -1,0 +1,246 @@
+/* Modern CSS Reset and Custom Properties */
+:root {
+    --dark-bg: #121212;
+    --dark-secondary: #1E1E1E;
+    --gold-primary: #FFD700;
+    --gold-secondary: #DAA520;
+    --gold-accent: #B8860B;
+    --text-primary: #FFFFFF;
+    --text-secondary: #E0E0E0;
+    --glass-effect: rgba(255, 255, 255, 0.1);
+    --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s var(--animation-timing);
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--gold-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* MacOS-style Glass Morphism */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid var(--glass-effect);
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--dark-secondary), var(--dark-bg));
+    border-bottom: 2px solid var(--gold-accent);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, var(--gold-primary) 0%, transparent 70%);
+    opacity: 0.1;
+    animation: pulse 4s infinite;
+}
+
+/* Typography with MacOS-style */
+h1, h2 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(to right, var(--gold-primary), var(--gold-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: titleGlow 3s infinite alternate;
+}
+
+h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+h2 { font-size: 2rem; margin-bottom: 0.8rem; }
+
+/* Main Content Area */
+main {
+    margin: 40px 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* PDF Viewer Enhancement */
+#pdf-viewer {
+    margin-bottom: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    background: var(--dark-secondary);
+    transition: transform 0.3s ease;
+}
+
+iframe:hover {
+    transform: scale(1.01);
+}
+
+/* Rating Component */
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.rating button {
+    background: var(--dark-secondary);
+    color: var(--gold-primary);
+    border: 2px solid var(--gold-accent);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rating button:hover {
+    background: var(--gold-primary);
+    color: var(--dark-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(218, 165, 32, 0.3);
+}
+
+/* Footer Enhancement */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(to top, var(--dark-bg), transparent);
+    position: relative;
+}
+
+footer::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold-primary), transparent);
+}
+
+/* Advanced Animations */
+@keyframes titleGlow {
+    0% {
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+    }
+    100% {
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.1; }
+    50% { transform: scale(1.05); opacity: 0.2; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container { width: 95%; padding: 15px; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    iframe { height: 400px; }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold-accent);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-primary);
+}
+
+/* Selection Styling */
+::selection {
+    background: var(--gold-primary);
+    color: var(--dark-bg);
+}
+
+/* Focus States */
+:focus {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: 2px;
+}
+
+/* Interactive Elements */
+a {
+    color: var(--gold-primary);
+    text-decoration: none;
+    position: relative;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--gold-primary);
+    transform: scaleX(0);
+    transition: transform 0.3s var(--animation-timing);
+}
+
+a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Loading State */
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--glass-effect), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
